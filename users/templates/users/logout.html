@@ -1,0 +1,14 @@
+{% extends "medapp/base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h2>{% trans "Logged out" %}</h2>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+           <a href="{% url 'login' %}">{% trans "Log back in" %}</a>
+        </small>
+    </div>
+
+{% endblock content %}
+
+

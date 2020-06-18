@@ -23,12 +23,12 @@ msgid "body"
 msgstr "коментар:"
 
 #: .\medapp\models.py:19
-msgid "posttitle"
-msgstr "заглавие"
+msgid "Title"
+msgstr "Заглавие"
 
 #: .\medapp\models.py:20
-msgid "contentpost"
-msgstr "съдържание"
+msgid "Content"
+msgstr "Съдържание"
 
 #: .\medapp\templates\medapp\about.html:4
 msgid "Random text about us"

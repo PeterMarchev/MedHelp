@@ -13,7 +13,8 @@ from django.views.generic import (
 )
 from .models import Post, Comment
 from django.utils.translation import gettext as _
-
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 
@@ -39,10 +40,10 @@ def post_detail(request, pk):
         print("Hello", comment_form)
 
     context = {
-        'user': request.user, 
-        'post': post, 
-        'comments': comments, 
-        'new_comment': new_comment, 
+        'user': request.user,
+        'post': post,
+        'comments': comments,
+        'new_comment': new_comment,
         'comment_form': comment_form
     }
     return render(request,  template_name, context)
@@ -52,16 +53,50 @@ def about(request):  # about test page
     return render(request, 'medapp/about.html')
 
 
+def sendmails(request):
+    if request.method == 'POST':
+        message = request.POST['message']
+        title = request.POST['topic']
+        sender = request.POST['E-mail']
+
+        send_mail(
+            'title',
+            'message',
+            'sender',
+            ['petardm.uni@gmail.com'],
+            fail_silently=False
+        )
+
+    return render(request, 'medapp/index.html', {'sender': sender})
+
+
 def home(request):  # landing page blog
     from django.utils import translation
-    #user_language = 'bg'
-    #translation.activate(user_language)
-    #request.session[translation.LANGUAGE_SESSION_KEY] = user_language
-
+    
     if translation.LANGUAGE_SESSION_KEY in request.session:
         del request.session[translation.LANGUAGE_SESSION_KEY]
 
-    return render(request, 'medapp/index.html')
+    if request.method == 'POST':
+        message_content = request.POST['message-content']
+        message_title = request.POST['message-title']
+        message_sender = request.POST['message-email']
+        made_by = """Author: """
+
+        send_mail(
+            message_title,
+            made_by + message_sender + """
+        
+Message: """ + message_content,
+            message_sender,
+            ['petardm.uni@gmail.com'],
+            fail_silently=False
+        )
+
+        return render(request, 'medapp/index.html', {'message_sender': message_sender})
+
+    else:
+
+        return render(request, 'medapp/index.html')
 
 
 def forum(request):  # forum page about
@@ -96,23 +131,18 @@ class UserPostListView(ListView):  # in order to get all posts by said user
 
 class PostDetailView(DetailView):
     model = Post
-    
 
-   
+    # def get(self, request, *args, **kwargs):
+    #   post = get_object_or_404(Post, pk=kwargs['pk'])
+    #  template_name = 'medapp/post_detail.html'
+    #  comments = Comment.objects.filter(post=post).values()
+    #  print("hello")
+    #  return render(request, template_name, {'post': post, 'comments': comments})
 
-
-    
-    #def get(self, request, *args, **kwargs):
-     #   post = get_object_or_404(Post, pk=kwargs['pk'])
-      #  template_name = 'medapp/post_detail.html'
-      #  comments = Comment.objects.filter(post=post).values()
-      #  print("hello")
-      #  return render(request, template_name, {'post': post, 'comments': comments})
-
-    #def post_detail(self, request):
-     #   model = Post
-     #   template_name = 'post_detail.html'
-     #   print("working")
+    # def post_detail(self, request):
+    #   model = Post
+    #   template_name = 'post_detail.html'
+    #   print("working")
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -130,9 +160,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = ['title', 'content']
-    
+
     def form_valid(self, form):
-        form.instance.author = self.request.user  
+        form.instance.author = self.request.user
         return super().form_valid(form)
 
     def test_func(self):

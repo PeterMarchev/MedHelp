@@ -16,8 +16,8 @@ STATUS = (
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100, verbose_name=_("posttitle"))
-    content = models.TextField(verbose_name=_("contentpost"))
+    title = models.CharField(max_length=100, verbose_name=_("Title"))
+    content = models.TextField(verbose_name=_("Content"))
     date_posted = models.DateTimeField(default=timezone.now)
     # Takes author name from the authors table. If user is deleted, all his posts are deleted too
     # each post can only have 1 author. Author is FK for User
@@ -28,7 +28,6 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    
     def get_absolute_url(self):  # returning path to a specific post
         return reverse('post-detail', kwargs={'pk': self.pk})
 

@@ -62,8 +62,8 @@
 								
 								<nav class="hide">
 									<a href="#home" id="homebtn">Home</a>
-									<a href="#service" id="servicebtn">Services</a>
 									<a href="#textus" id="textusbtn">Text Us</a> <!--id was "appointment-->
+									<a href="#service" id="servicebtn">Services</a>
 									<a href="#consultant" id="consultantbtn">Consultants</a>
 									<a href="#blog" id="blogbtn">Blog</a>											
 								</nav>
@@ -87,6 +87,12 @@
 			
 			<!-- End Header Area -->
 
+			{% if message %}
+				<center>
+					<h2>Thank you!</h2>
+					<p>We have received your email and will respond shortly!</p>
+				</center>
+			{% else %}
 			<!-- start banner Area -->
 			<section class="banner-area relative" id="home">
 				<div class="container">
@@ -115,6 +121,53 @@
 				</div>
 			</section>
 			<!-- End banner Area -->
+
+
+			<!-- Start contact us Area -->
+			<section class="about-area" id="textus"> <!--id was "appointment-->
+				<div class="container-fluid">
+					<div class="row d-flex justify-content-end align-items-center">
+						<div class="col-lg-6 col-md-12 about-left no-padding">
+							<img class="img-fluid" src="{% static 'medapp/img/about-img.jpg' %}" alt="">
+						</div>
+						<div class="col-lg-6 col-md-12 about-right no-padding">
+							<h1 id="ask">Ask us <br> a question</h1>
+							
+							
+							<form class="contact-us" id="myForm" action="{% url 'medapp-home' %}" method="POST">
+								{% csrf_token %}
+								<div class="row">
+								 		
+							 			<div class="col-lg-6 d-flex flex-column">
+											<input id="askemail" placeholder="E-mail" name="message-email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-mail'" class="form-control mt-20" required="" type="text" required>
+										</div>
+										<div class="col-lg-6 d-flex flex-column">
+											<input name="message-title" id="asktopic" placeholder="Topic" class="single-in mt-20"  onblur="this.placeholder = 'Topic'" onfocus="this.placeholder= ''" type="text"  required>
+										</div>
+										<div class="col-lg-12 flex-column">
+											<textarea class="form-control mt-20" id="askmessage" name="message-content" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'" required=""></textarea>
+										</div>
+
+										<div class="col-lg-12 d-flex justify-content-end send-btn">
+											<button type="submit" class="submit-btn primary-btn mt-20 text-uppercase" id="btnsend">Send message <span class="lnr lnr-arrow-right"></span></button>
+											<!--<span class="lnr lnr-arrow-right"></span>-->
+										</div>
+										
+										<div class="alert-msg"></div>
+									</div>
+								</form>
+
+								
+								
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			
+			<!-- End contact us Area -->
 
 			<!-- Start feature Area -->
 			<section class="feature-area section-gap" id="service">
@@ -196,43 +249,7 @@
 			<!-- End feature Area -->
 
 
-			<!-- Start about Area -->
-			<section class="about-area" id="textus"> <!--id was "appointment-->
-				<div class="container-fluid">
-					<div class="row d-flex justify-content-end align-items-center">
-						<div class="col-lg-6 col-md-12 about-left no-padding">
-							<img class="img-fluid" src="{% static 'medapp/img/about-img.jpg' %}" alt="">
-						</div>
-						<div class="col-lg-6 col-md-12 about-right no-padding">
-							<h1 id="ask">Ask us <br> a question</h1>
-							<form class="booking-form" id="myForm" action="donate.php">
-								 	<div class="row">
-								 		<div class="col-lg-12 d-flex flex-column">
-							 				<input name="name" id="askname"  placeholder="Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" class="form-control mt-20" required="" type="text" required>
-								 		</div>
-							 			<div class="col-lg-6 d-flex flex-column">
-											<input name="E-mail" id="askemail" placeholder="E-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-mail'" class="form-control mt-20" required="" type="text" required>
-										</div>
-										<div class="col-lg-6 d-flex flex-column">
-											<input name="topic" id="asktopic" placeholder="Topic" class="single-in mt-20"  onblur="this.placeholder = 'Topic'" onfocus="this.placeholder= ''" type="text"  required>
-										</div>
-										<div class="col-lg-12 flex-column">
-											<textarea class="form-control mt-20" id="askmessage" name="message" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'" required=""></textarea>
-										</div>
-
-										<div class="col-lg-12 d-flex justify-content-end send-btn">
-											<button class="submit-btn primary-btn mt-20 text-uppercase" id="btnsend">Send message<span class="lnr lnr-arrow-right"></span></button>
-										</div>
-
-										<div class="alert-msg"></div>
-									</div>
-					  		</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!-- End about Area -->
+			
 
 			<!-- Start consultans Area -->
 			<section class="consultans-area section-gap" id="consultant">
@@ -349,45 +366,45 @@
 						<div class="col-md-8 pb-30 header-text">
 							<h1 id="articlenew">Latest articles</h1>
 							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> labore  et dolore magna aliqua.
+									A selection of the latest news articles, picked by our moderators.
 							</p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="single-blog col-lg-4 col-md-4">
-
-							<img class="f-img img-fluid mx-auto" src="{% static 'medapp/img/b1.jpg' %}" alt="">
-							<h4>
-								<a href="#" id="art1">Article 1</a>
-							</h4>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea.
-								 commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-							</p>
-							<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
-								<div>
-									<img class="img-fluid" src="{% static 'medapp/img/user.png' %}" alt="">
-									<a href="#" id="author1"><span>Author</span></a>
+							<a href="https://www.bbc.com/news/health-53077879">	
+								<img class="f-img img-fluid mx-auto" href="https://www.bbc.com/news/health-53077879" src="{% static 'medapp/img/b1.jpg' %}" alt=""> </a>
+										<h4>
+											<a href="https://www.bbc.com/news/health-53077879" id="art1">What is dexamethasone and how does it work?</a>
+										</h4>
+										<p>
+											An anti-inflammatory drug called dexamethasone has been hailed as a ground-breaking treatment for hospital patients seriously ill with Covid-19.
+											A UK trial showed the drug could save lives - the first internationally to do so - and it can be used in the NHS immediately. 
+										</p>
+								<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
+										<div>
+											<img class="img-fluid" src="{% static 'medapp/img/author.png' %}" alt="">
+											<a href="https://www.bbc.com/news" id="author1"><span>BBC news</span></a>
+										</div>
+										<div class="meta">
+											10.05.2019
+										</div>
 								</div>
-								<div class="meta">
-									10.05.2019
-								</div>
-							</div>
 						</div>
 						
 						<div class="single-blog col-lg-4 col-md-4">
-							<img class="f-img img-fluid mx-auto" src="{% static 'medapp/img/b2.jpg' %}" alt="">
+							<a href="https://www.who.int/news-room/feature-stories/detail/who-manifesto-for-a-healthy-recovery-from-covid-19"><img class="f-img img-fluid mx-auto" src="{% static 'medapp/img/b2.jpg' %}" alt=""></a>
 							<h4>
-								<a href="#" id="art2">Article 2</a>
+								<a href="https://www.who.int/news-room/feature-stories/detail/who-manifesto-for-a-healthy-recovery-from-covid-19" id="art2">What we have learned from COVID-19</a>
 							</h4>
 							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea.
- 								commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+								COVID-19 is the greatest global shock in decades.  Hundreds of thousands of lives have been lost, and the world’s economy likely faces the worst recession since the 1930s. 
+								The resulting loss of employment and income will cause further damage to livelihoods, health, and sustainable development.
 							</p>
 							<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
 								<div>
-									<img class="img-fluid" src="{% static 'medapp/img/user.png' %}" alt="">
-									<a href="#" id="author2"><span>Author</span></a>
+									<img class="img-fluid" src="{% static 'medapp/img/author2.png' %}" alt="">
+									<a href="https://www.who.int" id="author2"><span>World health organization</span></a>
 								</div>
 								<div class="meta">
 									14.05.2019
@@ -396,17 +413,16 @@
 						</div>
 						
 						<div class="single-blog col-lg-4 col-md-4">
-							<img class="f-img img-fluid mx-auto" src="{% static 'medapp/img/b3.jpg' %}" alt="">
+								<a href="https://www.sciencedaily.com/releases/2020/06/200617121500.htm"><img class="f-img img-fluid mx-auto" src="{% static 'medapp/img/b3.jpg' %}" alt=""></a>
 							<h4>
-								<a href="#" id="art3">Article 3</a>
+								<a href="https://www.sciencedaily.com/releases/2020/06/200617121500.htm" id="art3">Light-activated 'CRISPR' triggers precision gene editing and super-fast DNA repair</a>
 							</h4>
 							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
-							</p>
+								In a series of experiments using human cancer cell lines, scientists say they have successfully used light as a trigger to make precise cuts in genomic material rapidly, using a molecular scalpel known as CRISPR.</p>
 							<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
 								<div>
-									<img class="img-fluid" src="{% static 'medapp/img/user.png' %}" alt="">
-									<a href="#" id="author3"><span>Author</span></a>
+									<img class="img-fluid" src="{% static 'medapp/img/author3.png' %}" alt="">
+									<a href="https://www.sciencedaily.com" id="author3"><span>ScienceDaily</span></a>
 								</div>
 								<div class="meta">
 									13.05.2019
@@ -419,10 +435,12 @@
 			</section>
 			<!-- end blog Area -->
 
+			{% endif %}
+
 			<!-- start footer Area -->
-			<!--<footer class="footer-area section-gap">-->
+			<footer class="footer-area section-gap">
 				
-			<!--</footer>-->
+			</footer>
 			<!-- End footer Area -->
 
 			<script src="{% static 'medapp/js/vendor/jquery-2.2.4.min.js' %}"></script>

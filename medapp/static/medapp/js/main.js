@@ -74,40 +74,4 @@ $(document).ready(function() {
 		delay: 10,
 		time: 1000
 	});
-
-	// -------   Mail Send ajax
-
-	$(document).ready(function() {
-		var form = $('#myForm'); // contact form
-		var submit = $('.submit-btn'); // submit button
-		var alert = $('.alert-msg'); // alert div for show alert message
-
-		// form submit event
-		form.on('submit', function(e) {
-			e.preventDefault(); // prevent default form submit
-
-			$.ajax({
-				url: 'mail.php', // form action url
-				type: 'POST', // form submit method get/post
-				dataType: 'html', // request type html/json/xml
-				data: form.serialize(), // serialize form data
-				beforeSend: function() {
-					alert.fadeOut();
-					if (window.location.hash) {
-						if (window.location.hash === '#bg') {
-							submit.html('Изпращане....'); // change submit button text
-						} else submit.html('Sending....'); // change submit button text
-					}
-				},
-				success: function(data) {
-					alert.html(data).fadeIn(); // fade in response data
-					form.trigger('reset'); // reset form
-					submit.attr('style', 'display: none !important'); // reset submit button text
-				},
-				error: function(e) {
-					console.log(e);
-				}
-			});
-		});
-	});
 });

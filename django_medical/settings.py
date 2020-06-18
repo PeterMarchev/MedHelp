@@ -136,6 +136,13 @@ LOCALE_PATHS = [
 
 STATIC_URL = '/static/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST_USER = "medichelp.office@gmail.com"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True  # whether to use TLS secure connection or not
+EMAIL_HOST_PASSWORD = env('PASS_GMAIL')
+
 # path to directory where files are located
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'  # how we access the media in the browser

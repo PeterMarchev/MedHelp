@@ -38,23 +38,23 @@
     <div class="card-body">
       <!-- comments -->
       {% with post.comments.count as total_comments %}
-      <h2>{{ total_comments }} {% trans "comments" %}</h2>
+        <h2>{{ total_comments }} {% trans "comments" %}</h2>
 
-      <p>
-        {% endwith %} 
-        {% for comment in post.comments.all %}
-      </p>
+        <p>
+          {% endwith %} 
+          {% for comment in post.comments.all %}
+        </p>
 
-      <div class="comments" style="padding: 10px;">
-        <a class="mr-2" href="{% url 'user-posts' comment.user %}">
-          {{ comment.user }}
-          
-        </a>
-        <span class=" text-muted font-weight-normal">
-          {{ comment.created_on }}
-        </span>
-        {{ comment.body | linebreaks }}
-      </div>
+        <div class="comments" style="padding: 10px;">
+            <a class="mr-2" href="{% url 'user-posts' comment.user %}">
+              {{ comment.user }}
+              
+            </a>
+            <span class=" text-muted font-weight-normal">
+              {{ comment.created_on }}
+            </span>
+              {{ comment.body | linebreaks }}
+        </div>
 
       {% endfor %}
     </div>
@@ -67,20 +67,20 @@
         
         
         {% if new_comment %}
-        <div class="alert alert-success" role="alert">
-            {% trans "Comment posted successfully!" %}
-        </div>
+         
+          <div class="alert alert-success" role="alert">
+              {% trans "Comment posted successfully!" %}
+          </div>
 
         {% else %}
         
-
           <h3>{% trans "Leave a comment" %}</h3>
           <form method="post" style="margin-top: 1.3em;">
-            {{ comment_form | crispy }}
-            {% csrf_token %}
-          <button type="submit" class="btn btn-primary  btn-lg">{% trans "Submit" %}</button>
+              {{ comment_form | crispy }}
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary  btn-lg">{% trans "Submit" %}</button>
+          </form>
 
-        </form>
         {% endif %}
       </div>
     </div>

@@ -53,26 +53,9 @@ def about(request):  # about test page
     return render(request, 'medapp/about.html')
 
 
-def sendmails(request):
-    if request.method == 'POST':
-        message = request.POST['message']
-        title = request.POST['topic']
-        sender = request.POST['E-mail']
-
-        send_mail(
-            'title',
-            'message',
-            'sender',
-            ['petardm.uni@gmail.com'],
-            fail_silently=False
-        )
-
-    return render(request, 'medapp/index.html', {'sender': sender})
-
-
 def home(request):  # landing page blog
     from django.utils import translation
-    
+
     if translation.LANGUAGE_SESSION_KEY in request.session:
         del request.session[translation.LANGUAGE_SESSION_KEY]
 
@@ -126,7 +109,14 @@ class UserPostListView(ListView):  # in order to get all posts by said user
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         # filters posts by said user and orders them from latest to oldest
+        viewed_user = User.objects.get(username=user)
         return Post.objects.filter(author=user).order_by('-date_posted')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user"] = get_object_or_404(
+            User, username=self.kwargs.get('username'))
+        return context
 
 
 class PostDetailView(DetailView):

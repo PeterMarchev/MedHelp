@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-09 18:59+0300\n"
+"POT-Creation-Date: 2020-06-19 18:40+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\medapp\forms.py:10 .\medapp\models.py:41
+#: .\medapp\forms.py:10 .\medapp\models.py:40
 msgid "body"
 msgstr "коментар:"
 
@@ -71,11 +71,11 @@ msgstr "Навигация"
 msgid "Change language"
 msgstr "Смени език"
 
-#: .\medapp\templates\medapp\base.html:99
+#: .\medapp\templates\medapp\base.html:100
 msgid "Website"
 msgstr "Уеб сайт"
 
-#: .\medapp\templates\medapp\base.html:100
+#: .\medapp\templates\medapp\base.html:101
 msgid "Announcements"
 msgstr "Обявления"
 
@@ -125,7 +125,7 @@ msgstr "Обнови"
 msgid "comments"
 msgstr "коментара"
 
-#: .\medapp\templates\medapp\post_detail.html:71
+#: .\medapp\templates\medapp\post_detail.html:72
 msgid "Comment posted successfully!"
 msgstr "Коментарът е постнат успешно!"
 
@@ -144,6 +144,10 @@ msgstr "Нов пост"
 #: .\medapp\templates\medapp\post_form.html:15
 msgid "Post"
 msgstr "Предай"
+
+#: .\medapp\templates\medapp\user_posts.html:15
+msgid "Posts by"
+msgstr "Постове от"
 
 #: .\users\models.py:14
 msgid "imageprofile"

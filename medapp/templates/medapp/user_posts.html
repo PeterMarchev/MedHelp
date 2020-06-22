@@ -8,11 +8,11 @@
   <div class="media-body">
     
     <h2 class="account-heading">{{ view.kwargs.username }}</h2>
-    <p class="text-secondary">{{ user.emasil }} </p></p>
+    <p class="text-secondary">{{ user.email }} </p></p>
 
   </div>
 </div>
-    <h1 class="mb-3">{% trans "Posts by" %} {{ view.kwargs.username }}  ({{ page_obj.paginator.count }})</h1>
+    <h1 class="mb-3">{% trans "Posts timeline" %}  ({{ page_obj.paginator.count }})</h1>
 
     {% for post in posts %}
     

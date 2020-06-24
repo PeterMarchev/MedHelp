@@ -2,15 +2,24 @@
 {% load i18n %}
 
 {% block content %}
-<div class="media">
+<div class="media row ">
   
   <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
   <div class="media-body">
     
-    <h2 class="account-heading">{{ view.kwargs.username }}</h2>
-    <p class="text-secondary">{{ user.email }} </p></p>
-
+    <h2 class="account-heading">{{ user.username }}</h2>
+    <p class="text">{{ user.email }} </p>
+    
   </div>
+</div>
+<br>
+<div class="media border-0">
+  <p1 class="text-secondary" >Age: {{ user.profile.age }} </p>
+  <p2 class="text-secondary" >Location: {{ user.profile.location }} </p>
+  <p3 class="text-secondary" >Gender: {{ user.profile.gender }} </p>
+  <p4 class="text-secondary" >Diseases I suffer from: {{ user.profile.disease }} </p>
+  <p5 class="text-secondary" >Medications I take: {{ user.profile.medications }} </p>
+  <p6 class="text-secondary" >My story: {{ user.profile.about_user }} </p>
 </div>
     <h1 class="mb-3">{% trans "Posts timeline" %}  ({{ page_obj.paginator.count }})</h1>
 
@@ -19,9 +28,9 @@
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+              <!--<img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">-->
               <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
-              <a class="mr-2" >{{ post.author.email }}</a>
+             <!-- <a class="mr-2" >{{ post.author.email }}</a>-->
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
               <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>

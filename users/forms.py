@@ -35,4 +35,4 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile  # model we want to work with is Profile
         # fields that we want to work with (in our case just image)
-        fields = ['image']
+        fields = ['patient_name', 'age', 'location', 'gender', 'about_user', 'disease', 'medications', 'image']

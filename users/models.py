@@ -12,6 +12,21 @@ from django.utils.translation import gettext_lazy as _
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics', verbose_name=_("imageprofile"))
+    patient_name = models.CharField(max_length=50, default = "", verbose_name=_("My name"))
+    age = models.CharField(max_length=3, default = _("N/A"), verbose_name=_("Age"))
+    location = models.CharField(max_length=50, default = _("N/A"),  verbose_name=_("Location"))
+    about_user = models.TextField(default = _("N/A"), verbose_name=_("About me"))
+    disease = models.CharField(max_length=100, default = _("N/A"),  verbose_name=_("Diseases"))
+    medications = models.CharField(max_length=100, default = _("N/A"),  verbose_name=_("Medications"))
+    GENDER_CHOICES = [
+    ('Male', 'Male'),
+    ('Female', 'Female'),
+    ('N/A', 'Not Specified'),
+]
+    gender = models.CharField(max_length=6, default = _("N/A"),  choices=GENDER_CHOICES)
+
+
+    
 
     def __str__(self):
         return f'{self.user.username} Profile'

@@ -30,9 +30,18 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['username', 'email', ]
 
 
-# inherits from ModelForm. Allows us to update image
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
-        model = Profile  # model we want to work with is Profile
-        # fields that we want to work with (in our case just image)
-        fields = ['patient_name', 'age', 'location', 'gender', 'about_user', 'disease', 'medications', 'image']
+        model = Profile  
+
+        fields = ['patient_name', 'age', 'location', 
+        'gender', 'disease', 'medications','about_user',
+        'doctor_qualifications', 'doctor_speciality', 'doctor_education', 'doctor_workspace', 'image']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        doctor_str = 'Only fill in if you are a doctor'
+        self.fields['doctor_qualifications'].widget.attrs['placeholder'] = doctor_str
+        self.fields['doctor_speciality'].widget.attrs['placeholder'] = doctor_str
+        self.fields['doctor_education'].widget.attrs['placeholder'] = doctor_str
+        self.fields['doctor_workspace'].widget.attrs['placeholder'] = doctor_str

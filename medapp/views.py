@@ -118,6 +118,7 @@ class UserPostListView(ListView):  # in order to get all posts by said user
             User, username=self.kwargs.get('username'))
         return context
 
+    
 
 class PostDetailView(DetailView):
     model = Post

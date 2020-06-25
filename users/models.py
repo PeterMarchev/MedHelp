@@ -24,9 +24,15 @@ class Profile(models.Model):
     ('N/A', 'Not Specified'),
 ]
     gender = models.CharField(max_length=6, default = _("N/A"),  choices=GENDER_CHOICES)
+    doctor_qualifications = models.CharField(max_length=50, default = "",  verbose_name=_("Qualification"))
+    doctor_speciality = models.CharField(max_length=50, default = "",  verbose_name=_("Speciality"))
+    doctor_education = models.CharField(max_length=50, default = "",  verbose_name=_("University"))
+    doctor_workspace = models.CharField(max_length=50, default = "",  verbose_name=_("Workplace"))
 
 
-    
+    @property
+    def is_doctor(self):
+        return self.user.groups.filter(name="Doctors").exists()
 
     def __str__(self):
         return f'{self.user.username} Profile'

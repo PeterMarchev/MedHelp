@@ -13,14 +13,26 @@
   </div>
 </div>
 <br>
+{% if user.profile.is_doctor %}
+<div class="media border-0">
+  <p1 class="text-secondary" >Age: {{ user.profile.age }} </p>
+  <p2 class="text-secondary" >Location: {{ user.profile.location }} </p>
+  <p3 class="text-secondary" >Gender: {{ user.profile.gender }} </p>
+  <p4 class="text-secondary" >Speciality: {{ user.profile.doctor_speciality }} </p>
+  <p5 class="text-secondary" >Qualifications: {{ user.profile.doctor_qualifications }} </p>
+  <p6 class="text-secondary" >Education: {{ user.profile.doctor_education }} </p>
+  <p7 class="text-secondary" >Workspace: {{ user.profile.doctor_workspace }} </p>
+  <p8 class="text-secondary" >My story: {{ user.profile.about_user }} </p>
+</div>
+{% else %}
 <div class="media border-0">
   <p1 class="text-secondary" >Age: {{ user.profile.age }} </p>
   <p2 class="text-secondary" >Location: {{ user.profile.location }} </p>
   <p3 class="text-secondary" >Gender: {{ user.profile.gender }} </p>
   <p4 class="text-secondary" >Diseases I suffer from: {{ user.profile.disease }} </p>
   <p5 class="text-secondary" >Medications I take: {{ user.profile.medications }} </p>
-  <p6 class="text-secondary" >My story: {{ user.profile.about_user }} </p>
-</div>
+  <p6 class="text-secondary" >My story: {{ user.profile.about_user }} </p></div>
+{% endif %}
     <h1 class="mb-3">{% trans "Posts timeline" %}  ({{ page_obj.paginator.count }})</h1>
 
     {% for post in posts %}

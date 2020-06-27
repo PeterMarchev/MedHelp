@@ -46,10 +46,15 @@
         </p>
 
         <div class="comments" style="padding: 10px;">
-            <a class="mr-2" href="{% url 'user-posts' comment.user %}">
-              {{ comment.user }}
-              
-            </a>
+            {% if comment.user.profile.is_doctor %}
+              <a class="mr-2" href="{% url 'user-posts' comment.user %}">
+                 {{ comment.user }} <img class="f-img img-fluid mx-auto" src="{% static 'medapp/img/verified.png' %}">  
+              </a>
+            {% else %}
+              <a class="mr-2" href="{% url 'user-posts' comment.user %}">
+                  {{ comment.user }}   
+              </a>
+            {% endif %}
             <span class=" text-muted font-weight-normal">
               {{ comment.created_on }}
             </span>

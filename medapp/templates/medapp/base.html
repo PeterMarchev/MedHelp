@@ -81,9 +81,11 @@
                         <form action="{% url 'set_language' %}" method="post">
                             {% csrf_token %}
                             <input name="next" type="hidden" value="{{ redirect_to }}">
-                            <select
-                                name="language"> {% get_current_language as LANGUAGE_CODE %} {% get_available_languages as LANGUAGES %} {% get_language_info_list for LANGUAGES as languages %}
-                                {% for language in languages %}
+                            <select class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="language">
+                               {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                 {% get_language_info_list for LANGUAGES as languages %}
+                                  {% for language in languages %}
                                     <option value="{{ language.code }}"
                                       {% if language.code == LANGUAGE_CODE %}
                                         selected
@@ -93,14 +95,30 @@
                                     </option>
                                 {% endfor %}
                             </select>
-                            <input type="submit" class="btn btn-info" value="{% trans "Change language" %}"/>                           
+                              
+                            <input type="submit" class="btn btn-info" value="{% trans "Go" %}"/>                   
                         </form>
                       
+                        
                       <li class="list-group-item list-group-item-light" id="website">{% trans "Website" %}</li>
                       <li class="list-group-item list-group-item-light" id="announcements">{% trans "Announcements" %}</li>
                       <li class="list-group-item list-group-item-light">stuff</li>
                       <li class="list-group-item list-group-item-light">etc</li>
-                    </ul>
+                      <div class="dropdown">
+                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Find a doctor
+                          </button>
+                          <div class="dropdown-menu" name="specDrop" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/dermatologists">Dermatologist</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/neurologists">Neurologist</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/pediatricians">Pediatrician</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/orthopedists">Orthopedist</a>
+                            <a class="dropdown-item" href="http://127.0.0.1:8000/oncologists">Oncologist</a>
+
+                          </div>
+                        </div>   
+                      
+                    
                   </p>
                 </div>
               </div>

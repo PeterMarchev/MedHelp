@@ -47,6 +47,7 @@ def post_detail(request, pk):
         'comment_form': comment_form
     }
     return render(request,  template_name, context)
+    
 
 
 def about(request):  # about test page
@@ -118,7 +119,41 @@ class UserPostListView(ListView):  # in order to get all posts by said user
             User, username=self.kwargs.get('username'))
         return context
 
-    
+
+def find_derm(request):
+    template_name = 'medapp/derma.html'
+
+    data = Profile.objects.filter(doctor_speciality='Dermatologist')
+    return render(request,  template_name, {'data': data, })
+
+
+def find_neur(request):
+    template_name = 'medapp/neuro.html'
+
+    data = Profile.objects.filter(doctor_speciality='Neurologist')
+    return render(request,  template_name, {'data': data, })
+
+
+def find_pedi(request):
+    template_name = 'medapp/pedi.html'
+
+    data = Profile.objects.filter(doctor_speciality='Pediatrician')
+    return render(request,  template_name, {'data': data, })
+
+
+def find_orth(request):
+    template_name = 'medapp/ortho.html'
+
+    data = Profile.objects.filter(doctor_speciality='Orthopedist')
+    return render(request,  template_name, {'data': data, })
+
+
+def find_onco(request):
+    template_name = 'medapp/onco.html'
+
+    data = Profile.objects.filter(doctor_speciality='Oncologist')
+    return render(request,  template_name, {'data': data, })
+
 
 class PostDetailView(DetailView):
     model = Post

@@ -32,11 +32,11 @@ class UserUpdateForm(forms.ModelForm):
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
-        model = Profile  
+        model = Profile
 
-        fields = ['patient_name', 'age', 'location', 
-        'gender', 'disease', 'medications','about_user',
-        'doctor_qualifications', 'doctor_speciality', 'doctor_education', 'doctor_workspace', 'image']
+        fields = ['patient_name', 'age', 'location',
+                  'gender', 'disease', 'medications', 'about_user',
+                  'doctor_qualifications', 'doctor_speciality', 'doctor_education', 'doctor_workspace', 'image']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

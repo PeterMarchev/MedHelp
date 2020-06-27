@@ -1,7 +1,14 @@
 {% extends "medapp/base.html" %}
 {% load i18n %}
 {% block content %}
-<h1>{% trans "Random text about us" %}</h1>
+<!--<h1>{% trans "Random text about us" %}</h1>-->
+
+ 
+
+{% for data in data %}
+<a class="mr-2" href="{% url 'user-posts' data %}">{{data}}</a> 
+    <br>
+{% endfor %}
 {% endblock content %}
 
 

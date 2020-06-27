@@ -22,11 +22,11 @@ def register(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-    #by passing parameters in, i'm also populating form with the current info
+        # by passing parameters in, i'm also populating form with the current info
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
-        request.FILES,
-        instance=request.user.profile)
+                                   request.FILES,
+                                   instance=request.user.profile)
 
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
@@ -34,18 +34,15 @@ def profile(request):
             messages.success(request, f'Update successful')
             return redirect('profile')
 
-
-
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
-  
 
-    #passing to template by creating a context (which is a dictionery with its keys being the variables we will access within the template)
+    # passing to template by creating a context (which is a dictionery with its keys being the variables we will access within the template)
     context = {
         'u_form': u_form,
         'p_form': p_form
     }
 
-
-    return render(request, 'users/profile.html', context) #passing context here so we can access the forms
+    # passing context here so we can access the forms
+    return render(request, 'users/profile.html', context)

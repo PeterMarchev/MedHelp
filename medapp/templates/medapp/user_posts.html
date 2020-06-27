@@ -1,38 +1,38 @@
 {% extends "medapp/base.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
 <div class="media row ">
   
   <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
   <div class="media-body">
-    
-    <h2 class="account-heading">{{ user.username }}</h2>
+    {% if user.profile.is_doctor %}
+      <h2 class="account-heading">{{ user.username }} <img class="f-img img-fluid mx-auto" src="{% static 'medapp/img/verified.png' %}"> </h2>
+    {% else %}
+      <h2 class="account-heading">{{ user.username }}</h2>
+    {% endif %}
     <p class="text">{{ user.email }} </p>
     
   </div>
 </div>
 <br>
-{% if user.profile.is_doctor %}
-<div class="media border-0">
-  <p1 class="text-secondary" >Age: {{ user.profile.age }} </p>
-  <p2 class="text-secondary" >Location: {{ user.profile.location }} </p>
-  <p3 class="text-secondary" >Gender: {{ user.profile.gender }} </p>
-  <p4 class="text-secondary" >Speciality: {{ user.profile.doctor_speciality }} </p>
-  <p5 class="text-secondary" >Qualifications: {{ user.profile.doctor_qualifications }} </p>
-  <p6 class="text-secondary" >Education: {{ user.profile.doctor_education }} </p>
-  <p7 class="text-secondary" >Workspace: {{ user.profile.doctor_workspace }} </p>
-  <p8 class="text-secondary" >My story: {{ user.profile.about_user }} </p>
-</div>
-{% else %}
-<div class="media border-0">
-  <p1 class="text-secondary" >Age: {{ user.profile.age }} </p>
-  <p2 class="text-secondary" >Location: {{ user.profile.location }} </p>
-  <p3 class="text-secondary" >Gender: {{ user.profile.gender }} </p>
-  <p4 class="text-secondary" >Diseases I suffer from: {{ user.profile.disease }} </p>
-  <p5 class="text-secondary" >Medications I take: {{ user.profile.medications }} </p>
-  <p6 class="text-secondary" >My story: {{ user.profile.about_user }} </p></div>
-{% endif %}
+  <div class="media border-0">
+      <p1 class="text-secondary" >Age: {{ user.profile.age }} </p>
+      <p2 class="text-secondary" >Location: {{ user.profile.location }} </p>
+      <p3 class="text-secondary" >Gender: {{ user.profile.gender }} </p>
+    {% if user.profile.is_doctor %}
+      <p4 class="text-secondary" >Speciality: {{ user.profile.doctor_speciality }} </p>
+      <p5 class="text-secondary" >Qualifications: {{ user.profile.doctor_qualifications }} </p>
+      <p6 class="text-secondary" >Education: {{ user.profile.doctor_education }} </p>
+      <p7 class="text-secondary" >Workspace: {{ user.profile.doctor_workspace }} </p>
+    {% else %}
+      <p4 class="text-secondary" >Diseases I suffer from: {{ user.profile.disease }} </p>
+      <p5 class="text-secondary" >Medications I take: {{ user.profile.medications }} </p>
+    {% endif %}
+      <p8 class="text-secondary" >Biography: {{ user.profile.about_user }} </p>
+  </div>
+
     <h1 class="mb-3">{% trans "Posts timeline" %}  ({{ page_obj.paginator.count }})</h1>
 
     {% for post in posts %}

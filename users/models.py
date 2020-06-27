@@ -11,31 +11,51 @@ from django.utils.translation import gettext_lazy as _
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics', verbose_name=_("imageprofile"))
-    patient_name = models.CharField(max_length=50, default = "", verbose_name=_("My name"))
-    age = models.CharField(max_length=3, default = _("N/A"), verbose_name=_("Age"))
-    location = models.CharField(max_length=50, default = _("N/A"),  verbose_name=_("Location"))
-    about_user = models.TextField(default = _("N/A"), verbose_name=_("About me"))
-    disease = models.CharField(max_length=100, default = _("N/A"),  verbose_name=_("Diseases"))
-    medications = models.CharField(max_length=100, default = _("N/A"),  verbose_name=_("Medications"))
+    image = models.ImageField(
+        default='default.jpg', upload_to='profile_pics', verbose_name=_("imageprofile"))
+    patient_name = models.CharField(
+        max_length=50, default="", blank=True, verbose_name=_("My name"))
+    age = models.CharField(max_length=3, default=_(
+        "N/A"), blank=True, verbose_name=_("Age"))
+    location = models.CharField(max_length=50, default=_(
+        "N/A"), blank=True, verbose_name=_("Location"))
+    about_user = models.TextField(
+        default=_("N/A"), blank=True, verbose_name=_("About me"))
+    disease = models.CharField(max_length=100, default=_(
+        "N/A"), blank=True, verbose_name=_("Diseases"))
+    medications = models.CharField(max_length=100, default=_(
+        "N/A"), blank=True, verbose_name=_("Medications"))
     GENDER_CHOICES = [
-    ('Male', 'Male'),
-    ('Female', 'Female'),
-    ('N/A', 'Not Specified'),
-]
-    gender = models.CharField(max_length=6, default = _("N/A"),  choices=GENDER_CHOICES)
-    doctor_qualifications = models.CharField(max_length=50, default = "",  verbose_name=_("Qualification"))
-    doctor_speciality = models.CharField(max_length=50, default = "",  verbose_name=_("Speciality"))
-    doctor_education = models.CharField(max_length=50, default = "",  verbose_name=_("University"))
-    doctor_workspace = models.CharField(max_length=50, default = "",  verbose_name=_("Workplace"))
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+        ('N/A', 'Not Specified'),
+    ]
 
+    SPECIALITY_CHOICES = [
+        ('Neurologist', 'Neurologist'),
+        ('Pediatrician', 'Pediatrician'),
+        ('Orthopedist', 'Orthopedist'),
+        ('Oncologist', 'Oncologist'),
+        ('Dermatologist', 'Dermatologist'),
+    ]
+    gender = models.CharField(
+        max_length=6, default=_("N/A"),  choices=GENDER_CHOICES)
+    doctor_qualifications = models.CharField(
+        max_length=50, default="", blank=True, verbose_name=_("Qualification"))
+    doctor_speciality = models.CharField(
+        max_length=50, choices=SPECIALITY_CHOICES, blank=True,  verbose_name=_("Speciality"))
+    doctor_education = models.CharField(
+        max_length=50, default="", blank=True, verbose_name=_("University"))
+    doctor_workspace = models.CharField(
+        max_length=50, default="", blank=True, verbose_name=_("Workplace"))
 
     @property
     def is_doctor(self):
         return self.user.groups.filter(name="Doctors").exists()
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        # return f'{self.user.username} Profile'
+        return f'{self.user.username}'
 
     def save(self, *args, **kwargs):
         super(Profile, self).save(*args, **kwargs)

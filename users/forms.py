@@ -34,7 +34,7 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
 
-        fields = ['patient_name', 'age', 'location',
+        fields = ['real_name', 'age', 'location',
                   'gender', 'disease', 'medications', 'about_user',
                   'doctor_qualifications', 'doctor_speciality', 'doctor_education', 'doctor_workspace', 'image']
 

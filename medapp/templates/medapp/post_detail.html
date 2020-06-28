@@ -34,7 +34,7 @@
 <!------------------------------------------------------------------------------------------------------------------>
 
 
-  <div class="col-md-8 card mb-4  mt-3 ">
+  <div class="col-md-15 card mb-4  mt-3 ">
     <div class="card-body">
       <!-- comments -->
       {% with post.comments.count as total_comments %}
@@ -47,18 +47,20 @@
 
         <div class="comments" style="padding: 10px;">
             {% if comment.user.profile.is_doctor %}
+              <img class="rounded-circle article-img" src="{{ comment.user.profile.image.url }}">
               <a class="mr-2" href="{% url 'user-posts' comment.user %}">
-                 {{ comment.user }} <img class="f-img img-fluid mx-auto" src="{% static 'medapp/img/verified.png' %}">  
+                {{ comment.user }} <img class="f-img img-fluid mx-auto" src="{% static 'medapp/img/verified.png' %}">  
               </a>
             {% else %}
+              <img class="rounded-circle article-img" src="{{ comment.user.profile.image.url }}">
               <a class="mr-2" href="{% url 'user-posts' comment.user %}">
-                  {{ comment.user }}   
+                {{ comment.user }}   
               </a>
             {% endif %}
             <span class=" text-muted font-weight-normal">
               {{ comment.created_on }}
             </span>
-              {{ comment.body | linebreaks }}
+              <div style="position:relative; left:85px">{{ comment.body | linebreaks }}</div>
         </div>
 
       {% endfor %}

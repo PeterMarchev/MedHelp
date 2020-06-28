@@ -13,7 +13,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(
         default='default.jpg', upload_to='profile_pics', verbose_name=_("imageprofile"))
-    patient_name = models.CharField(
+    real_name = models.CharField(
         max_length=50, default="", blank=True, verbose_name=_("My name"))
     age = models.CharField(max_length=3, default=_(
         "N/A"), blank=True, verbose_name=_("Age"))

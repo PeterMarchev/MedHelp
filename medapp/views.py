@@ -122,16 +122,17 @@ class UserPostListView(ListView):  # in order to get all posts by said user
 
 def find_derm(request):
     template_name = 'medapp/derma.html'
-
     data = Profile.objects.filter(doctor_speciality='Dermatologist')
-    return render(request,  template_name, {'data': data, })
+    
+
+    return render(request,  template_name, {'data': data,})
 
 
 def find_neur(request):
     template_name = 'medapp/neuro.html'
 
     data = Profile.objects.filter(doctor_speciality='Neurologist')
-    return render(request,  template_name, {'data': data, })
+    return render(request,  template_name, {'data': data,})
 
 
 def find_pedi(request):

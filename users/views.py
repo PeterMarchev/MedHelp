@@ -2,21 +2,31 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.contrib.auth.views import LoginView
 # Create your views here.
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect("/forum/")
+
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()  # hashes password and saves user
-            #username = form.cleaned_data.get('username')
+            form.save()
             messages.success(
                 request, f'Account created successfully! You can now log in')
             return redirect('login')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
+
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+
+    redirect_authenticated_user = True
 
 
 @login_required

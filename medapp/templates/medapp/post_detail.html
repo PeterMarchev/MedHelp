@@ -60,7 +60,11 @@
             <span class=" text-muted font-weight-normal">
               {{ comment.created_on }}
             </span>
-              <div style="position:relative; left:85px">{{ comment.body | linebreaks }}</div>
+
+            {%if user == comment.user %}
+               <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'comment-delete' comment.id %}">{% trans "Delete" %}</a>
+            {%endif%}
+              <div style="position:relative; left:20px; top:20px; left:20px">{{ comment.body | linebreaks }}</div>
         </div>
 
       {% endfor %}
@@ -96,8 +100,3 @@
 
 
 {% endblock content %}
-
-
-
-
-<!-- When dealing with detail views the context of the template is expected to be called "object" which is why every variable was named object.something -->

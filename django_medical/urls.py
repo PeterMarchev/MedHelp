@@ -26,7 +26,8 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True,
+                                                template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('', include('medapp.urls')),
 ]

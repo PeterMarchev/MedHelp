@@ -130,7 +130,7 @@ h4,
 h5,
 h6 {
 	font-family: "Poppins", sans-serif;
-	color: #222222;
+	color: #84b195;
 	line-height: 1.2em !important;
 	margin-bottom: 0;
 	margin-top: 0;
@@ -2036,8 +2036,7 @@ nav a:hover {
 .banner-content h1,
 .single-fact h2,
 .single-footer-widget h3 {
-	background: -moz-linear-gradient(0deg, #2380ff 0%, #52fdd9 100%);
-	background: -webkit-linear-gradient(0deg, #2380ff 0%, #52fdd9 100%);
+	background: -webkit-linear-gradient(0deg, #95b6e4 0%, #5f93db 100%);
 	background: -ms-linear-gradient(0deg, #2380ff 0%, #52fdd9 100%);
 	-webkit-background-clip: text;
 	background-clip: text;
@@ -2275,6 +2274,7 @@ nav a:hover {
 .single-feature .icon .lnr {
 	font-size: 40px;
 	font-weight: 300;
+	color: #84b195;
 }
 
 .single-feature h4 {

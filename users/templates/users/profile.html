@@ -15,9 +15,32 @@
           {% csrf_token %}
           <fieldset class="form-group">
               <legend class="border-bottom mb-4">{% trans "Profile Info" %}</legend>
+
               {{ u_form|crispy }}
-              {{ p_form|crispy }}
-          </fieldset>
+              
+              {%if user.profile.is_doctor%}
+                {{ p_form.real_name|as_crispy_field  }}
+                {{ p_form.age|as_crispy_field  }}
+                {{ p_form.location|as_crispy_field  }}
+                {{ p_form.gender|as_crispy_field  }}
+                {{ p_form.doctor_speciality|as_crispy_field  }}
+                {{ p_form.doctor_education|as_crispy_field  }}
+                {{ p_form.doctor_qualifications|as_crispy_field  }}
+                {{ p_form.doctor_workspace|as_crispy_field  }}
+                {{ p_form.about_user|as_crispy_field  }}
+                {{ p_form.image|as_crispy_field  }}
+              {% else %}
+                {{ p_form.real_name|as_crispy_field  }}
+                {{ p_form.age|as_crispy_field  }}
+                {{ p_form.location|as_crispy_field  }}
+                {{ p_form.gender|as_crispy_field  }}
+                {{ p_form.disease|as_crispy_field  }}
+                {{ p_form.medications|as_crispy_field  }}
+                {{ p_form.about_user|as_crispy_field  }}
+                {{ p_form.image|as_crispy_field  }}
+              {% endif %}
+
+            </fieldset>
           <div class="form-group">
               <button class="btn btn-outline-info" type="submit">{% trans "Update" %}</button>
           </div>

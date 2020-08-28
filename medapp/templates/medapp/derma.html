@@ -11,8 +11,7 @@
                 <div class="card-body">
                         {% for data in data %}
                         <a href="{% url 'user-posts' data %}"><img class="rounded-circle img-thumbnail" style="margin:0 auto;"  src="{{data.image.url}}"></a>
-
-                        <a class="text-center font-weight-bold"  "><p class=text-center">{{data.real_name}}</p></a> 
+                        <a class="text-center font-weight-bold"><p class="text-center">{{data.real_name}}</p></a> 
                         {%endfor%}
                 </div>
               </div>

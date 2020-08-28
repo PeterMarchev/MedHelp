@@ -1,7 +1,7 @@
 $default: #f9f9ff;
 $primary: #fcd2ff;
 $success: #4cd3e3;
-$info   : #38a4ff;
+$info: #38a4ff;
 $warning: #f4e700;
 $danger: #f44a40;
 $link: #f9f9ff;
@@ -14,7 +14,12 @@ $disable: (#222222, .3);
 	margin-bottom: 30px;
 	font-size: 24px;
 }
-b, i, sup, sub, u, del {
+b,
+i,
+sup,
+sub,
+u,
+del {
 	color: $primary;
 }
 h1 {
@@ -35,11 +40,21 @@ h5 {
 h6 {
 	font-size: 14px;
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	line-height: 1.5em;
 }
 .typography {
-	h1, h2, h3, h4, h5, h6 {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		color: $text-color;
 	}
 }
@@ -116,9 +131,9 @@ h1, h2, h3, h4, h5, h6 {
 		border: 1px solid $default;
 		background: $white;
 		&:hover {
-		color: $title-color;
-		background: $default;
-		border: 1px solid transparent;
+			color: $title-color;
+			background: $default;
+			border: 1px solid transparent;
 		}
 	}
 	&.primary {
@@ -155,7 +170,7 @@ h1, h2, h3, h4, h5, h6 {
 		color: $success;
 		border: 1px solid $success;
 		background: $white;
-		
+
 		&:hover {
 			color: $white;
 			background: $success;
@@ -176,7 +191,7 @@ h1, h2, h3, h4, h5, h6 {
 		color: $info;
 		border: 1px solid $info;
 		background: $white;
-		
+
 		&:hover {
 			color: $white;
 			background: $info;
@@ -281,7 +296,10 @@ h1, h2, h3, h4, h5, h6 {
 	}
 	.table-head {
 		display: flex;
-		.serial, .country, .visit, .percentage {
+		.serial,
+		.country,
+		.visit,
+		.percentage {
 			color: $title-color;
 			line-height: 40px;
 			text-transform: uppercase;
@@ -292,7 +310,10 @@ h1, h2, h3, h4, h5, h6 {
 		padding: 15px 0;
 		border-top: 1px solid #edf3fd;
 		display: flex;
-		.serial, .country, .visit, .percentage {
+		.serial,
+		.country,
+		.visit,
+		.percentage {
 			display: flex;
 			align-items: center;
 		}
@@ -371,7 +392,7 @@ h1, h2, h3, h4, h5, h6 {
 .ordered-list {
 	margin-left: 30px;
 	li {
-		list-style-type:decimal-leading-zero;
+		list-style-type: decimal-leading-zero;
 		color: $primary;
 		font-weight: 500;
 		line-height: 1.82em !important;
@@ -384,7 +405,7 @@ h1, h2, h3, h4, h5, h6 {
 .ordered-list-alpha {
 	li {
 		margin-left: 30px;
-		list-style-type:lower-alpha;
+		list-style-type: lower-alpha;
 		color: $primary;
 		font-weight: 500;
 		line-height: 1.82em !important;
@@ -397,7 +418,7 @@ h1, h2, h3, h4, h5, h6 {
 .ordered-list-roman {
 	li {
 		margin-left: 30px;
-		list-style-type:lower-roman;
+		list-style-type: lower-roman;
 		color: $primary;
 		font-weight: 500;
 		line-height: 1.82em !important;

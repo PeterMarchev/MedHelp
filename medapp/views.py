@@ -47,11 +47,14 @@ def post_detail(request, pk):
         'comment_form': comment_form
     }
     return render(request,  template_name, context)
-    
 
 
 def about(request):  # about test page
     return render(request, 'medapp/about.html')
+
+
+def announcement(request):
+    return render(request, 'medapp/announcements.html')
 
 
 def home(request):  # landing page blog
@@ -122,17 +125,18 @@ class UserPostListView(ListView):  # in order to get all posts by said user
 
 def find_derm(request):
     template_name = 'medapp/derma.html'
-    data = Profile.objects.filter(doctor_speciality='Dermatologist')
-    
+    #doctors = User.objects.filter(groups="1")
+    data = Profile.objects.filter(
+        doctor_speciality='Dermatologist')
 
-    return render(request,  template_name, {'data': data,})
+    return render(request,  template_name, {'data': data, })
 
 
 def find_neur(request):
     template_name = 'medapp/neuro.html'
 
     data = Profile.objects.filter(doctor_speciality='Neurologist')
-    return render(request,  template_name, {'data': data,})
+    return render(request,  template_name, {'data': data, })
 
 
 def find_pedi(request):
@@ -206,5 +210,16 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         post = self.get_object()  # gets post we're trying to update
         if self.request.user == post.author:  # checks if the person trying to edit is the author himself
+            return True
+        return False
+
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    success_url = '/forum/'
+
+    def test_func(self):
+        comment = self.get_object()  # gets post we're trying to update
+        if self.request.user == comment.user:  # checks if the person trying to edit is the author himself
             return True
         return False

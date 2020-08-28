@@ -5,7 +5,8 @@ from .views import(
     PostCreateView,
     PostUpdateView,
     PostDeleteView,
-    UserPostListView
+    UserPostListView,
+    CommentDeleteView
 )
 from . import views
 
@@ -27,12 +28,17 @@ urlpatterns = [
     path('forum/post/<int:pk>/delete/',
          PostDeleteView.as_view(), name='post-delete'),
 
+    path('forum/post/comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
+
     path('about/', views.about, name='medapp-about'),  # view was about
     path('dermatologists/', views.find_derm, name='medapp-test'),
     path('neurologists/', views.find_neur, name='medapp-test'),
     path('orthopedists/', views.find_orth, name='medapp-test'),
     path('pediatricians/', views.find_pedi, name='medapp-test'),
     path('oncologists/', views.find_onco, name='medapp-test'),
+    path('forum/announcements/', views.announcement, name='announcement'),
+    
+
 
 
 
